@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     tools:context=".MainActivity">
 
     <RadioGroup
+        android:id="@+id/rg_fonts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <RadioButton
+            android:id="@+id/rb_uni2zg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Unicode to Zawgyi" />
+
+        <RadioButton
+            android:id="@+id/rb_zg2uni"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Zawgyi to Unicode" />
-
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Unicode to Zawgyi" />
     </RadioGroup>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="top|start"
         android:hint="Input" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Convert" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Copy" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Clear" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top|start"
+        android:hint="Output" />
 
 </LinearLayout>
