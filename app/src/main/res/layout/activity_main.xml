@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
+            android:fontFamily="@font/play_write"
             android:text="Unicode to Zawgyi" />
 
         <RadioButton
@@ -28,10 +29,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/play_write"
             android:text="Zawgyi to Unicode" />
     </RadioGroup>
 
     <EditText
+        android:id="@+id/et_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -43,31 +46,42 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/bt_convert"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/play_write"
+            android:textSize="12sp"
             android:text="Convert" />
 
         <Button
+            android:id="@+id/bt_copy"
             android:layout_width="0dp"
+            android:textSize="12sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:fontFamily="@font/play_write"
             android:text="Copy" />
 
         <Button
+            android:id="@+id/bt_clear"
+            android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/play_write"
             android:text="Clear" />
 
     </LinearLayout>
 
     <EditText
+        android:id="@+id/et_output"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:editable="false"
         android:gravity="top|start"
         android:hint="Output" />
 
