@@ -1,5 +1,9 @@
 package it.saimao.p2_font_converter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,25 +25,70 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rbZg2Uni, rbUni2Zg;
     private EditText etInput, etOutput;
     private Button btConvert, btCopy, btClear;
+    private Typeface zgFont, uniFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        zgFont = getResources().getFont(R.font.zawgyi_one);
+        uniFont = getResources().getFont(R.font.pyidaungsu);
         initUi();
         initListeners();
     }
 
     private void initListeners() {
-        rbUni2Zg.setOnCheckedChangeListener((buttonView, isChecked) -> Toast.makeText(MainActivity.this, "Uni 2 Zg is checked " + isChecked, Toast.LENGTH_SHORT).show());
-
-        rbZg2Uni.setOnCheckedChangeListener((buttonView, isChecked) -> Toast.makeText(MainActivity.this, "Zg 2 Uni is checked " + isChecked, Toast.LENGTH_SHORT).show());
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rb_uni2zg) {
+                    etInput.setTypeface(uniFont);
+                    etOutput.setTypeface(zgFont);
+                } else {
+                    etInput.setTypeface(zgFont);
+                    etOutput.setTypeface(uniFont);
+                }
+            }
+        });
 
         btConvert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputText = etInput.getText().toString();
-                etOutput.setText(inputText);
+                String input = etInput.getText().toString();
+                String output;
+                if (rbZg2Uni.isChecked()) {
+                    // Zawgyi to Unicode
+                    output = Rabbit.zg2uni(input);
+                } else {
+                    // Unicode to Zawgyi
+                    output = Rabbit.uni2zg(input);
+                }
+                etOutput.setText(output);
+            }
+        });
+
+        btClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etInput.getText().clear();
+                etOutput.getText().clear();
+            }
+        });
+
+        btCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String output = etOutput.getText().toString();
+                if (!output.isEmpty()) {
+                    // Copy text
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("font_converter", output);
+                    clipboardManager.setPrimaryClip(clipData);
+                    Toast.makeText(getApplicationContext(), "Output text copied!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No output text to copy!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
